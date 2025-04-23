@@ -4,6 +4,7 @@ import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:equina_task/widget/custom_elevated_buttom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignInForm extends StatefulWidget {
@@ -130,6 +131,10 @@ class _SignInFormState extends State<SignInForm> {
         if (userType == "Equestrian User") ...[
           _buildLabel("Phone Number"),
           AppTextFormField(
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9*#]')),
+              LengthLimitingTextInputFormatter(11),
+            ],
             controller: _phoneController,
             hintText: "Phone Number",
             prefixIcon: SizedBox(

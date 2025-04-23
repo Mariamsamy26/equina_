@@ -3,6 +3,7 @@ import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:equina_task/widget/custom_elevated_buttom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -16,10 +17,10 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool _isChecked = false;
   bool _isPasswordVisible = false;
-
 
   @override
   void dispose() {
@@ -42,9 +43,9 @@ class _RegisterFormState extends State<RegisterForm> {
           SizedBox(height: 5.h),
           CustomElevatedButtom(
             text: 'Register',
-            OnPressed: validateForm()?() {}:null,
-            colorButton: validateForm()?mainBlue:greyBorder,
-            colorText: validateForm()?white:tutorialBg,
+            OnPressed: validateForm() ? () {} : null,
+            colorButton: validateForm() ? mainBlue : greyBorder,
+            colorText: validateForm() ? white : tutorialBg,
           ),
         ],
       ),
@@ -60,16 +61,35 @@ class _RegisterFormState extends State<RegisterForm> {
         AppTextFormField(controller: _nameController, hintText: "Name"),
         SizedBox(height: 5.h),
 
-
-        _buildLabel("Phone Number"),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _buildLabel("Phone Number"),
+            Spacer(),
+            Text(
+              "phone not verified ",
+              style: TextManager.regular().copyWith(
+                color: redErorr
+              ),
+            ),
+            SizedBox(width: 5.w),
+            Image.asset(
+              "assets/images/red_cross.png",
+              height: 20.h,
+              width: 20.w,
+            ),
+          ],
+        ),
         AppTextFormField(
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9*#]')),
+            LengthLimitingTextInputFormatter(11),
+          ],
           controller: _phoneController,
           hintText: "Phone Number",
           prefixIcon: SizedBox(
             width: 10.w,
-            child: Center(
-              child: Text('🇪🇬', style: TextStyle(fontSize: 20)),
-            ),
+            child: Center(child: Text('🇪🇬', style: TextStyle(fontSize: 20))),
           ),
         ),
         SizedBox(height: 10.h),
@@ -133,7 +153,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
   Widget _buildLabel(String text) {
     return Padding(
-      padding:  EdgeInsets.only(top: 10.h),
+      padding: EdgeInsets.only(top: 10.h),
       child: Text(text, style: TextManager.regular()),
     );
   }

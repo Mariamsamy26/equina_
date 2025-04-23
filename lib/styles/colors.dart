@@ -20,6 +20,7 @@ const mainBlueLight = Color.fromRGBO(235, 243, 251, 1);
 const tutorialBg = Color.fromRGBO(0, 0, 0, 0.4);
 var clearIconColor = const Color.fromRGBO(19, 26, 34, 1).withOpacity(0.3);
 const lightGreyFilter = Color.fromRGBO(229, 233, 243, 1);
+const redErorr = Color.fromRGBO(254, 56, 81, 1);
 
 const lorem =
     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum';
