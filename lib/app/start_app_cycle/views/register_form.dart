@@ -16,11 +16,10 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-
-  bool _isPasswordVisible = false;
+  final TextEditingController _confirmPasswordController =TextEditingController();
   bool _isChecked = false;
+  bool _isPasswordVisible = false;
+
 
   @override
   void dispose() {
@@ -34,17 +33,18 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: lightGreyFilter,
-      // padding: SizeConfig.base,
+      color: backgroundGrey,
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         children: [
           _buildUserFields(),
           _agreed(),
+          SizedBox(height: 5.h),
           CustomElevatedButtom(
-            text: 'Sign In',
-            OnPressed: () {},
-            colorButton: mainBlue,
-            colorText: white,
+            text: 'Register',
+            OnPressed: validateForm()?() {}:null,
+            colorButton: validateForm()?mainBlue:greyBorder,
+            colorText: validateForm()?white:tutorialBg,
           ),
         ],
       ),
@@ -60,13 +60,18 @@ class _RegisterFormState extends State<RegisterForm> {
         AppTextFormField(controller: _nameController, hintText: "Name"),
         SizedBox(height: 5.h),
 
-        // _buildLabel("Phone Number"),
-        // AppPhoneFormField(
-        //   controller: _phoneController,
-        //   hintText: "Phone Number",
-        // ),
+
         _buildLabel("Phone Number"),
-        AppTextFormField(controller: _nameController, hintText: "Name"),
+        AppTextFormField(
+          controller: _phoneController,
+          hintText: "Phone Number",
+          prefixIcon: SizedBox(
+            width: 10.w,
+            child: Center(
+              child: Text('🇪🇬', style: TextStyle(fontSize: 20)),
+            ),
+          ),
+        ),
         SizedBox(height: 10.h),
 
         _buildLabel("Password"),
@@ -81,30 +86,28 @@ class _RegisterFormState extends State<RegisterForm> {
 
   Widget _agreed() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Transform.scale(
-          scale: 1.0,
-          child: Checkbox(
-            value: _isChecked,
-            onChanged: (value) {
-              setState(() {
-                _isChecked = value!;
-              });
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-            activeColor: mainBlue,
+        Checkbox(
+          value: _isChecked,
+          onChanged: (value) {
+            setState(() {
+              _isChecked = value!;
+            });
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
           ),
+          activeColor: mainBlue,
         ),
         Expanded(
           child: RichText(
             textAlign: TextAlign.start,
             text: TextSpan(
-              style: TextStyle(fontSize: 14.sp, color: lightGreyFilter),
+              style: TextStyle(fontSize: 14.sp, color: lightGreyLabel),
               children: [
-                TextSpan(text: "I have read and agreed to the "),
+                TextSpan(text: "I have read and agreed to the \n"),
                 TextSpan(
                   text: "Terms",
                   style: TextManager.regular().copyWith(
@@ -129,7 +132,10 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   Widget _buildLabel(String text) {
-    return Text(text, style: TextManager.regular());
+    return Padding(
+      padding:  EdgeInsets.only(top: 10.h),
+      child: Text(text, style: TextManager.regular()),
+    );
   }
 
   Widget _buildPasswordField(
@@ -145,9 +151,19 @@ class _RegisterFormState extends State<RegisterForm> {
           _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
         ),
         onPressed:
-            () => setState(() => _isPasswordVisible = !_isPasswordVisible),
+            () => setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            }),
       ),
       keyboardType: TextInputType.visiblePassword,
     );
+  }
+
+  bool validateForm() {
+    return _nameController.text.isNotEmpty &&
+        _phoneController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _confirmPasswordController.text.isNotEmpty &&
+        _isChecked == true;
   }
 }
