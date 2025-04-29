@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:equina_task/app/start_app_cycle/views/splash_screen.dart';
 import 'package:equina_task/styles/text_mang.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform);
+
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
