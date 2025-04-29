@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "11458361673",
+    "project_id": "equina-5689b",
+    "storage_bucket": "equina-5689b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11458361673:android:7246f91cac7f721d798298",
+        "android_client_info": {
+          "package_name": "com.example.equina_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHvJkY2EqmafbIm6JxCGE6y3Gb9dt0GCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
