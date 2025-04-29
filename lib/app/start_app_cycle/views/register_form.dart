@@ -66,31 +66,62 @@ class _RegisterFormState extends State<RegisterForm> {
           children: [
             _buildLabel("Phone Number"),
             Spacer(),
-            Text(
-              "phone not verified ",
-              style: TextManager.regular().copyWith(
-                color: redErorr
-              ),
-            ),
+            _isPhoneVerified()
+                ? Text(
+                  "phone verified ",
+                  style: TextManager.regular().copyWith(color: fixErorr),
+                )
+                : Text(
+                  "phone not verified ",
+                  style: TextManager.regular().copyWith(color: redErorr),
+                ),
             SizedBox(width: 5.w),
-            Image.asset(
-              "assets/images/red_cross.png",
-              height: 20.h,
-              width: 20.w,
-            ),
+            _isPhoneVerified()
+                ? Image.asset(
+                  "assets/images/checked.png",
+                  height: 20.h,
+                  width: 20.w,
+                )
+                : Image.asset(
+                  "assets/images/red_cross.png",
+                  height: 20.h,
+                  width: 20.w,
+                ),
           ],
         ),
-        AppTextFormField(
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'[0-9*#]')),
-            LengthLimitingTextInputFormatter(11),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 5,
+              child: AppTextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9*#]')),
+                  LengthLimitingTextInputFormatter(11),
+                ],
+                controller: _phoneController,
+                hintText: "Phone Number",
+                prefixIcon: SizedBox(
+                  width: 10.w,
+                  child: Center(
+                    child: Text('🇪🇬', style: TextStyle(fontSize: 20)),
+                  ),
+                ),
+                onChanged: (phone) {
+                  setState(() {});
+                },
+              ),
+            ),
+            if (_phoneController.text.length == 11)
+              Expanded(
+                flex: 3,
+                child: CustomElevatedButtom(
+                  text: "Verify Number",
+                  colorSize: 11,
+                  OnPressed: () {},
+                ),
+              ),
           ],
-          controller: _phoneController,
-          hintText: "Phone Number",
-          prefixIcon: SizedBox(
-            width: 10.w,
-            child: Center(child: Text('🇪🇬', style: TextStyle(fontSize: 20))),
-          ),
         ),
         SizedBox(height: 10.h),
 
@@ -184,6 +215,12 @@ class _RegisterFormState extends State<RegisterForm> {
         _phoneController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty &&
         _confirmPasswordController.text.isNotEmpty &&
+        _isPhoneVerified() &&
         _isChecked == true;
+  }
+
+  ///لسه هزود شرط otp
+  bool _isPhoneVerified() {
+    return _phoneController.text.length == 11 ? true : false;
   }
 }

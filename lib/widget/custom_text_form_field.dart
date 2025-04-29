@@ -16,6 +16,7 @@ class AppTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final bool isPasswordField;
+  final ValueChanged<String>? onChanged;
 
   const AppTextFormField({
     super.key,
@@ -31,6 +32,7 @@ class AppTextFormField extends StatefulWidget {
     this.keyboardType,
     this.inputFormatters,
     this.isPasswordField = false,
+    this.onChanged,
   });
 
   @override
@@ -55,26 +57,24 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           labelText: widget.label,
           hintText: widget.hintText,
           hintStyle: widget.hintStyle,
-          suffixIcon:
-              widget.isPasswordField
-                  ? IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility_outlined
-                          : Icons.visibility,
-                      color: black,
-                      size: 15,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  )
-                  : widget.suffixIcon,
+          suffixIcon: widget.isPasswordField
+              ? IconButton(
+            icon: Icon(
+              _isPasswordVisible
+                  ? Icons.visibility_outlined
+                  : Icons.visibility,
+              color: black,
+              size: 15,
+            ),
+            onPressed: () {
+              setState(() {
+                _isPasswordVisible = !_isPasswordVisible;
+              });
+            },
+          )
+              : widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           enabledBorder: OutlineInputBorder(
-
             borderSide: BorderSide(color: mainBlue, width: 2.w),
             borderRadius: BorderRadius.circular(8.r),
           ),
@@ -91,6 +91,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         validator: widget.validator,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
+        onChanged: widget.onChanged,
       ),
     );
   }

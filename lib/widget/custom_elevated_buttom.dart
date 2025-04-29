@@ -11,6 +11,7 @@ class CustomElevatedButtom extends StatelessWidget {
   final double height;
   final Color colorButton;
   final Color colorText;
+  final double? colorSize;
 
   CustomElevatedButtom({
     super.key,
@@ -20,6 +21,7 @@ class CustomElevatedButtom extends StatelessWidget {
     this.width = 325,
     this.colorButton = mainBlue,
     this.colorText = white,
+    this.colorSize,
   });
 
   @override
@@ -40,7 +42,7 @@ class CustomElevatedButtom extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7.r),
                 )),
             child: Text(text,
-                style: TextManager.regular(fontSize: 20).copyWith(color: colorText)
+                style: TextManager.medium(fontSize: colorSize??20).copyWith(color: colorText)
                 ),
           ),
         ),
