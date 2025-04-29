@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../widgets/dialog_otp.dart';
+
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
 
@@ -69,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
             _isPhoneVerified()
                 ? Text(
                   "phone verified ",
-                  style: TextManager.regular().copyWith(color: fixErorr),
+                  style: TextManager.regular().copyWith(color: black),
                 )
                 : Text(
                   "phone not verified ",
@@ -118,7 +120,14 @@ class _RegisterFormState extends State<RegisterForm> {
                 child: CustomElevatedButtom(
                   text: "Verify Number",
                   colorSize: 11,
-                  OnPressed: () {},
+                  OnPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => DialogOTP()
+
+                      ),
+                    );
+                  },
                 ),
               ),
           ],

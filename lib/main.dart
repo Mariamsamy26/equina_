@@ -7,10 +7,10 @@ import 'package:equina_task/styles/text_mang.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform);
 
-  WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
