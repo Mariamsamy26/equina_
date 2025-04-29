@@ -47,9 +47,9 @@ class Navigation {
   //       builder: (context) => const LoadingGifDialog());
   // }
 
-  // void showLoadingTextDialog(BuildContext context) {
-  //   showDialog(barrierDismissible: false, context: context, builder: (context) => const LoadingTextDialog());
-  // }
+  void showLoadingTextDialog(BuildContext context, AlertDialog Dialog) {
+    showDialog(barrierDismissible: false, context: context, builder: (context) => Dialog);
+  }
 
   void closeDialog(BuildContext context) {
     Navigator.of(context).pop();

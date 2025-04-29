@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../helpers/navigation_helper.dart';
 import '../widgets/dialog_otp.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -97,6 +98,7 @@ class _RegisterFormState extends State<RegisterForm> {
             Expanded(
               flex: 5,
               child: AppTextFormField(
+                keyboardType:TextInputType.phone ,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9*#]')),
                   LengthLimitingTextInputFormatter(11),
@@ -121,12 +123,10 @@ class _RegisterFormState extends State<RegisterForm> {
                   text: "Verify Number",
                   colorSize: 10,
                   OnPressed: () {
-                    // Navigator.of(context).pushReplacement(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => DialogOTP()
-                    //
-                    //   ),
-                    // );
+                    showDialog(
+                      context: context,
+                      builder: (context) => DialogOTP(),
+                    );
                   },
                 ),
               ),
@@ -232,4 +232,6 @@ class _RegisterFormState extends State<RegisterForm> {
   bool _isPhoneVerified() {
     return _phoneController.text.length == 11 ? true : false;
   }
+
+
 }

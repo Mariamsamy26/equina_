@@ -4,7 +4,7 @@ const white = Colors.white;
 const mainDarkBlue = Color.fromRGBO(1, 22, 62, 1);
 const black = Colors.black;
 
-// const lightGrey = Color(0xffe3ecfa);
+const lightGrey = Color(0xffe3ecfa);
 const offWhite = Color(0xfff0f5fe);
 const googleWhite = Color.fromRGBO(243, 243, 243, 1);
 
