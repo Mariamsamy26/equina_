@@ -125,7 +125,9 @@ class _RegisterFormState extends State<RegisterForm> {
                   OnPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => DialogOTP(),
+                      builder: (context) => DialogOTP(
+
+                      ),
                     );
                   },
                 ),
@@ -232,6 +234,5 @@ class _RegisterFormState extends State<RegisterForm> {
   bool _isPhoneVerified() {
     return _phoneController.text.length == 11 ? true : false;
   }
-
 
 }

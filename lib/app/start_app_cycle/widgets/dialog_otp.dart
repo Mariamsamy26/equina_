@@ -15,10 +15,9 @@ class DialogOTP extends StatefulWidget {
 
 class _DialogOTPState extends State<DialogOTP> {
   late int _secondsRemaining = 60;
-  late Timer _timer;
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_secondsRemaining > 0) {
         setState(() {
           _secondsRemaining--;
@@ -34,12 +33,6 @@ class _DialogOTPState extends State<DialogOTP> {
         );
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _startTimer();
   }
 
   @override
