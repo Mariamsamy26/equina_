@@ -71,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
             _isPhoneVerified()
                 ? Text(
                   "phone verified ",
-                  style: TextManager.regular().copyWith(color: black),
+                  style: TextManager.regular().copyWith(color: fixErorr),
                 )
                 : Text(
                   "phone not verified ",
@@ -119,14 +119,14 @@ class _RegisterFormState extends State<RegisterForm> {
                 flex: 3,
                 child: CustomElevatedButtom(
                   text: "Verify Number",
-                  colorSize: 11,
+                  colorSize: 10,
                   OnPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => DialogOTP()
-
-                      ),
-                    );
+                    // Navigator.of(context).pushReplacement(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => DialogOTP()
+                    //
+                    //   ),
+                    // );
                   },
                 ),
               ),
